@@ -3,12 +3,14 @@ const morgan = require('morgan');
 const connectToDatabase = require('./database');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const dotenv = require('dotenv');
 
 // routes
 const orderRoutes = require('./routes/order.routes');
 const adviserRoutes = require('./routes/adviser.routes');
 const agencyRoutes = require('./routes/agency.routes');
 const tripRoutes = require('./routes/trip.routes');
+const authRoutes = require('./routes/auth.routes');
 
 
 //instance of express
@@ -20,6 +22,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
+dotenv.config();
 
 // connect to database
 connectToDatabase()
@@ -42,8 +45,9 @@ app.locals.uploader = multer({
 // endpoints
 app.use("/orders", orderRoutes);
 app.use("/advisers", adviserRoutes);
-app.use('/agencies', agencyRoutes)
-app.use('/trips', tripRoutes)
+app.use('/agencies', agencyRoutes);
+app.use('/trips', tripRoutes);
+app.use('/auth', authRoutes);
 
 
 // catch all :*
