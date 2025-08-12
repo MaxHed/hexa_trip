@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # Service MongoDB
+  mongodb:
+    image: mongo:8.0
+    container_name: hexa-trip-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: hexa-trip
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - hexa-trip-network
+
+
+
+# Volumes nommés
+volumes:
+  mongodb_data:
+    driver: local
+
+# Réseaux
+networks:
+  hexa-trip-network:
+    driver: bridge 
