@@ -43,7 +43,7 @@ const login = async (req, res) => {
             id: user._id,
             username: user.username,
             email: user.email
-        }, jwtSecret, { expiresIn: "1h" });
+        }, jwtSecret, { expiresIn: "24h" });
 
         const { password: _, __V, ...userWithoutPassword } = user._doc;
         return res.status(StatusCodes.OK).json({ token, user: userWithoutPassword });
