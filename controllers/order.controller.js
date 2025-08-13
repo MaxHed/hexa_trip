@@ -5,7 +5,8 @@ const Order = require('../models/Order');
 
 const getAll = async (req, res) => {
     try {
-        const orders = await Order.find({}).populate('trip');
+        const { email } = req.query;
+        const orders = await Order.find({ email }).populate('trip');
         return res.status(StatusCodes.OK).send(orders);
     } catch (error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Error while fetching orders, message: " + error.message);

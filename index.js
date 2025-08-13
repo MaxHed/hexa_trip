@@ -12,7 +12,7 @@ const agencyRoutes = require('./routes/agency.routes');
 const tripRoutes = require('./routes/trip.routes');
 const authRoutes = require('./routes/auth.routes');
 const profileRoutes = require('./routes/profile.routes');
-
+const CheckoutRoutes = require('./routes/checkout.routes');
 
 //instance of express
 const app = express();
@@ -50,6 +50,7 @@ app.use('/agencies', agencyRoutes);
 app.use('/trips', tripRoutes);
 app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
+app.use('/create-checkout-session', CheckoutRoutes);
 
 // catch all :*
 app.use((req, res) => {
